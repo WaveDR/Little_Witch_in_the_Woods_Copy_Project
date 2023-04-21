@@ -101,7 +101,7 @@ public class Object_Witch: MonoBehaviour
                 }
             }
             potion_Num = pot_ingredient[0] + pot_ingredient[1] + pot_ingredient[2] + Pot_Fire_Power + Pot_Spoon_Rotate;
-            Debug.Log("гу : " + potion_Num);
+            //Debug.Log("гу : " + potion_Num);
         }
     }
     public void Make_Potion(int[] ingredient)
