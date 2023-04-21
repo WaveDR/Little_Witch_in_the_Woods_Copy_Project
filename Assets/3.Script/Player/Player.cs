@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
     public float player_Cur_Stamina;
     public float player_Max_Stamina;
 
+    GameObject wallObj;
+
+    Vector2 dirVec;
     // Start is called before the first frame update
 
     void Awake()
@@ -41,12 +44,37 @@ public class Player : MonoBehaviour
         player_Move_Speed = speed;
         box.enabled = false;
     }
-
+    private void FixedUpdate()
+    {
+        Player_Ray_Cast_Hit();
+    }
     // Update is called once per frame
     void Update()
     {
         Player_Input(collision_Target,collision_Spawner_Target);
         Player_Anim();
+    }
+
+    void Player_Ray_Cast_Hit()
+    {
+
+        Debug.DrawRay(rigid.position, dirVec * 0.7f, new Color(0, 1, 0));
+
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, dirVec, 0.7f,
+            LayerMask.GetMask("Object"));
+
+        if (rayHit.collider != null)
+        {
+            player_Move_Speed = 0;
+        }
+        else
+        {
+            player_Move_Speed = speed;
+        }
+
+
+
+
     }
     private void Player_Input(Collider2D collision_Target, Collider2D collision_Spawner_Target)
     {
@@ -175,6 +203,44 @@ public class Player : MonoBehaviour
                     StartCoroutine(Player_Rooting(enemy));
                 }
             }
+        }
+
+        if (player_Move_Y > 0)
+        {
+            dirVec = new Vector2(0, 1);
+        }
+        if (player_Move_Y <= 0)
+        {
+            dirVec = new Vector2(0, -1);
+        }
+        if (player_Move_X > 0)
+        {
+            dirVec = new Vector2(1, 0);
+        }
+        if (player_Move_X < 0)
+        {
+            dirVec = new Vector2(-1, 0);
+        }
+
+        //우측 하단
+        if (player_Move_X > 0 && player_Move_Y < 0)
+        {
+            dirVec = new Vector2(1, -1);
+        }
+        //우측 상단
+        if (player_Move_X > 0 && player_Move_Y > 0)
+        {
+            dirVec = new Vector2(1, 1);
+        }
+        //좌측 상단
+        if (player_Move_X < 0 && player_Move_Y < 0)
+        {
+            dirVec = new Vector2(-1, -1);
+        }
+        //좌측 하단
+        if (player_Move_X < 0 && player_Move_Y > 0)
+        {
+            dirVec = new Vector2(-1, 1);
         }
     }
     IEnumerator SwingDeray()

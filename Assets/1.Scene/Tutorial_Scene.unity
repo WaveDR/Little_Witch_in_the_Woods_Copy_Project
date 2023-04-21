@@ -8872,7 +8872,7 @@ GameObject:
   - component: {fileID: 425309426}
   - component: {fileID: 425309425}
   - component: {fileID: 425309424}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: window (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12620,7 +12620,7 @@ GameObject:
   - component: {fileID: 544589722}
   - component: {fileID: 544589721}
   - component: {fileID: 544589720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: window (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13077,7 +13077,7 @@ GameObject:
   - component: {fileID: 566829337}
   - component: {fileID: 566829336}
   - component: {fileID: 566829335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: window (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16514,7 +16514,7 @@ GameObject:
   - component: {fileID: 730965694}
   - component: {fileID: 730965693}
   - component: {fileID: 730965692}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: window (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29451,7 +29451,7 @@ GameObject:
   - component: {fileID: 1221507937}
   - component: {fileID: 1221507936}
   - component: {fileID: 1221507935}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: window (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31153,7 +31153,7 @@ GameObject:
   - component: {fileID: 1297123984}
   - component: {fileID: 1297123983}
   - component: {fileID: 1297123985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Edge_Collader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
