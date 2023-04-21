@@ -128,6 +128,9 @@ MonoBehaviour:
   sprite: {fileID: 0}
   isCollect: 0
   isLookAt: 0
+  isMove: 0
+  isPlayer_Lookat: 0
+  isHunt: 0
 --- !u!58 &4794659554208278217
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -109,7 +109,7 @@ public class Enemy_Spawner : MonoBehaviour
                     for(int i = 0; i<spawnEnemy_Count; i++)
                     {
                         float rand_Falling = Random.Range(5,9);
-                        Vector2 faillingPos = new Vector2(enemys[i].transform.position.x, enemys[i].transform.localPosition.y + 0.51f);
+                        Vector2 faillingPos = new Vector2(enemys[i].transform.position.x, transform.localPosition.y - 3f);
                         enemys[i].transform.position = Vector3.MoveTowards(enemys[i].transform.position, faillingPos, rand_Falling * Time.deltaTime);
                         anim.SetBool("isInteraction", false);
                         charge_Button_Count = 0;
@@ -125,7 +125,7 @@ public class Enemy_Spawner : MonoBehaviour
                     for (int i = 0; i < spawnEnemy_Count; i++)
                     {
                         float rand_Falling = 5;
-                        Vector2 faillingPos = new Vector2(enemys[i].transform.position.x, transform.localPosition.y - 1f);
+                        Vector2 faillingPos = new Vector2(enemys[i].transform.position.x, transform.localPosition.y + 1f);
                         enemys[i].transform.position = Vector3.MoveTowards(enemys[i].transform.position, faillingPos, rand_Falling * Time.deltaTime);
                         anim.SetBool("isInteraction", false);
                         box.enabled = false;

@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     public Animator anim;
     public Player player;
     public SpriteRenderer sprite;
-    private Vector2 Move_Point;
+    public Vector2 Move_Point;
 
     private float enemy_MoveSpeed;
     private float move_Time;
@@ -26,10 +26,10 @@ public class Enemy : MonoBehaviour
     public bool isCollect;
     public bool isLookAt;
 
-    private bool isMove;
-    private bool isPlayer_Lookat;
-    private bool isHunt;
-    private bool isCreature;
+    [SerializeField] private bool isMove;
+    [SerializeField] private bool isPlayer_Lookat;
+    [SerializeField] private bool isHunt;
+     private bool isCreature;
 
 
     private CircleCollider2D circle;
@@ -114,7 +114,7 @@ public class Enemy : MonoBehaviour
             }
             if (!isHunt)
             {
-                Move_Point = new Vector3(transform.position.x + randPos_X, transform.position.y + randPos_Y, 0).normalized;
+                Move_Point = new Vector3(transform.position.x + randPos_X, transform.position.y + randPos_Y, 0);
             }
         }
 

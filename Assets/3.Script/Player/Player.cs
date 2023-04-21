@@ -65,14 +65,52 @@ public class Player : MonoBehaviour
 
         if (rayHit.collider != null)
         {
-            player_Move_Speed = 0;
+            isAction = true;
         }
         else
         {
-            player_Move_Speed = speed;
+            isAction = false;
+
         }
 
 
+        if (player_Move_Y > 0)
+        {
+            dirVec = new Vector2(0, 1);
+        }
+        if (player_Move_Y <= 0)
+        {
+            dirVec = new Vector2(0, -1);
+        }
+        if (player_Move_X > 0)
+        {
+            dirVec = new Vector2(1, 0);
+        }
+        if (player_Move_X < 0)
+        {
+            dirVec = new Vector2(-1, 0);
+        }
+
+        //우측 하단
+        if (player_Move_X > 0 && player_Move_Y < 0)
+        {
+            dirVec = new Vector2(1, -1);
+        }
+        //우측 상단
+        if (player_Move_X > 0 && player_Move_Y > 0)
+        {
+            dirVec = new Vector2(1, 1);
+        }
+        //좌측 상단
+        if (player_Move_X < 0 && player_Move_Y < 0)
+        {
+            dirVec = new Vector2(-1, -1);
+        }
+        //좌측 하단
+        if (player_Move_X < 0 && player_Move_Y > 0)
+        {
+            dirVec = new Vector2(-1, 1);
+        }
 
 
     }
@@ -205,43 +243,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (player_Move_Y > 0)
-        {
-            dirVec = new Vector2(0, 1);
-        }
-        if (player_Move_Y <= 0)
-        {
-            dirVec = new Vector2(0, -1);
-        }
-        if (player_Move_X > 0)
-        {
-            dirVec = new Vector2(1, 0);
-        }
-        if (player_Move_X < 0)
-        {
-            dirVec = new Vector2(-1, 0);
-        }
-
-        //우측 하단
-        if (player_Move_X > 0 && player_Move_Y < 0)
-        {
-            dirVec = new Vector2(1, -1);
-        }
-        //우측 상단
-        if (player_Move_X > 0 && player_Move_Y > 0)
-        {
-            dirVec = new Vector2(1, 1);
-        }
-        //좌측 상단
-        if (player_Move_X < 0 && player_Move_Y < 0)
-        {
-            dirVec = new Vector2(-1, -1);
-        }
-        //좌측 하단
-        if (player_Move_X < 0 && player_Move_Y > 0)
-        {
-            dirVec = new Vector2(-1, 1);
-        }
     }
     IEnumerator SwingDeray()
     {

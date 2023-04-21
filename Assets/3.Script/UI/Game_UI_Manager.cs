@@ -43,7 +43,7 @@ public class Game_UI_Manager : MonoBehaviour
     [SerializeField] private Image HUD_Loster_Press_Bar;
 
 
-    Animator anim;
+    public Animator anim;
 
     [SerializeField] private Transform Gage_Bar_Pos;
 

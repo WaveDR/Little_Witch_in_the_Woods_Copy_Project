@@ -18,6 +18,10 @@ TagManager:
   - Smk_Anim
   - Witch_Obj_Loster
   - UI_Lost
+  - Witch_House_Door
+  - Witch_House_In_Door
+  - Witch_House_Elevaiter
+  - Witch_House_Elevaiter_Under
   layers:
   - Default
   - TransparentFX
