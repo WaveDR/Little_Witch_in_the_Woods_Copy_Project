@@ -22,6 +22,7 @@ TagManager:
   - Witch_House_In_Door
   - Witch_House_Elevaiter
   - Witch_House_Elevaiter_Under
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - Water
   - UI
   - Object
-  - 
+  - NPC
   - 
   - 
   - 

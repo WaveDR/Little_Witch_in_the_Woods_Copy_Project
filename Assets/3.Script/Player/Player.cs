@@ -29,8 +29,8 @@ public class Player : MonoBehaviour
     public float player_Cur_Stamina;
     public float player_Max_Stamina;
 
-    GameObject wallObj;
-
+    public GameObject wallObj;
+    public bool isTree = false;
     Vector2 dirVec;
     // Start is called before the first frame update
 
@@ -66,12 +66,15 @@ public class Player : MonoBehaviour
         if (rayHit.collider != null)
         {
             isAction = true;
+            wallObj = rayHit.collider.gameObject;
         }
         else
         {
             isAction = false;
+            wallObj = null;
 
         }
+
 
 
         if (player_Move_Y > 0)
@@ -117,7 +120,8 @@ public class Player : MonoBehaviour
     private void Player_Input(Collider2D collision_Target, Collider2D collision_Spawner_Target)
     {
         if (!Game_UI_Manager.Instance.player_UI_Quest_On && !Game_UI_Manager.Instance.player_UI_Book_On && !Game_UI_Manager.Instance.player_UI_Inventory_On 
-          && !Game_UI_Manager.Instance.player_UI_Juicer && !Game_UI_Manager.Instance.player_UI_Loster && !Game_UI_Manager.Instance.player_UI_Pot)
+          && !Game_UI_Manager.Instance.player_UI_Juicer && !Game_UI_Manager.Instance.player_UI_Loster && !Game_UI_Manager.Instance.player_UI_Pot
+          && !Game_UI_Manager.Instance.select_trigger)
         {
             player_Move_X = Input.GetAxisRaw("Horizontal");
             player_Move_Y = Input.GetAxisRaw("Vertical");
@@ -125,19 +129,28 @@ public class Player : MonoBehaviour
 
             player_Action_Charge = Input.GetKey(KeyCode.Space);
         }
-        
-        if (player_Run)
+
+
+
+        if (player_Move_Speed == 0)
+        {
+            SoundManager.Instance.Stop_Sound_Effect("Move_Player");
+            SoundManager.Instance.Stop_Sound_Effect("Run_Player");
+        }
+        if (player_Run )
         {
             player_Move_Speed = 5;
         }
-        else if (!player_Run)
+        else if (!player_Run )
         {
             player_Move_Speed = speed;
         }
+
         if (isAction ||Game_UI_Manager.Instance.player_UI_Quest_On || Game_UI_Manager.Instance.player_UI_Book_On || Game_UI_Manager.Instance.player_UI_Inventory_On
-            || Game_UI_Manager.Instance.player_UI_Juicer || Game_UI_Manager.Instance.player_UI_Loster || Game_UI_Manager.Instance.player_UI_Pot
+            || Game_UI_Manager.Instance.player_UI_Juicer || Game_UI_Manager.Instance.player_UI_Loster || Game_UI_Manager.Instance.player_UI_Pot || Game_UI_Manager.Instance.select_trigger
             )
         {
+           
             player_Move_Speed = 0;
         }
 
@@ -191,6 +204,12 @@ public class Player : MonoBehaviour
 
                     witch_Tool.Witch_UI();
                 }
+
+                if (collision_Target.CompareTag("NPC"))
+                {
+                    Game_UI_Manager.Instance.select_trigger = true;
+
+                }
             }
             if (collision_Spawner_Target == null)
             {
@@ -203,10 +222,20 @@ public class Player : MonoBehaviour
                 Enemy_Spawner spawner = collision_Spawner_Target.GetComponent<Enemy_Spawner>();
                 if (player_Action_Charge)
                 {
-                    if(spawner.type == Enemy_Spawner.Spawner_Type.Tree || spawner.type == Enemy_Spawner.Spawner_Type.Apple 
-                        || spawner.type == Enemy_Spawner.Spawner_Type.BushBug)
+                 
+                    if(spawner.type == Enemy_Spawner.Spawner_Type.BushBug )
                     {
-                        spawner.anim.SetBool("isInteraction", true);
+                        SoundManager.Instance.Play_Sound_Effect("Spawn_BushBug");
+                    }
+                      
+                    else if (spawner.type == Enemy_Spawner.Spawner_Type.Apple)
+                    {
+                        SoundManager.Instance.Play_Sound_Effect("Spawn_BushBug");
+                    }
+                    else if (spawner.type == Enemy_Spawner.Spawner_Type.Tree && !isTree)
+                    {
+                        SoundManager.Instance.Play_Sound_Effect("Collect_Tree");
+                        isTree = true;
                     }
                     charge_Button_Count = spawner.charge_Button_Count;
                     charge_Button_Time += Time.deltaTime;
@@ -216,31 +245,55 @@ public class Player : MonoBehaviour
                         spawner.failling = true;
                         charge_Button_Time = 0;
                     }
+
+                    if (spawner.type == Enemy_Spawner.Spawner_Type.Tree || spawner.type == Enemy_Spawner.Spawner_Type.Apple
+                     || spawner.type == Enemy_Spawner.Spawner_Type.BushBug)
+                    {
+                        spawner.anim.SetBool("isInteraction", true);
+
+                    }
                 }
                 else if(!(player_Action_Charge))
                 {
                     charge_Button_Count = 1;
-                    charge_Button_Time = 0;
+                    charge_Button_Time = 0; 
                 }
             }
-
+            
             if (player_Action_Swing)
             {
                 if (collision_Target.CompareTag("Enemy"))
                 {
                     Enemy enemy = collision_Target.GetComponent<Enemy>();
-           
+
                     if (enemy.type != Enemy.Enemy_Type.BushBug)
                     {
                         return;
                     }
                     anim.SetBool("Mode_Swing", true);
                     box.enabled = true;
-
                     StopCoroutine(Player_Rooting(enemy));
                     StartCoroutine(Player_Rooting(enemy));
                 }
             }
+        }
+
+    }
+    IEnumerator Move_Sound()
+    {
+        if (player_Run && player_Move_Speed != 0)
+        {
+            SoundManager.Instance.Play_Sound_Effect("Run_Player");
+            yield return new WaitForSeconds(0.3f);
+            SoundManager.Instance.Stop_Sound_Effect("Run_Player");
+
+        }
+        else if (!player_Run && player_Move_Speed != 0)
+        {
+            SoundManager.Instance.Play_Sound_Effect("Move_Player");
+            yield return new WaitForSeconds(0.3f);
+            SoundManager.Instance.Stop_Sound_Effect("Move_Player");
+
         }
 
     }
@@ -263,44 +316,54 @@ public class Player : MonoBehaviour
         {
         
             anim.SetInteger("Swing_Dir", 1);
-            Debug.Log("우측상단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
+            //Debug.Log("우측상단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
         }
         //적이 플레이어보다 좌측상단에 존재할경우
         if (player_Vec_X > target_Vec_X && player_Vec_Y < target_Vec_Y)
         {
             anim.SetInteger("Swing_Dir", 5);
-            Debug.Log("좌측상단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
+            //Debug.Log("좌측상단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
         }
         //적이 플레이어보다 우측하단에 존재할경우
         if (player_Vec_X < target_Vec_X && player_Vec_Y > target_Vec_Y)
         {
             anim.SetInteger("Swing_Dir", 2);
-            Debug.Log("우측하단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
+           // Debug.Log("우측하단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
         }
         //적이 플레이어보다 좌측하단에 존재할경우
         if (player_Vec_X > target_Vec_X && player_Vec_Y < target_Vec_Y)
         {
             anim.SetInteger("Swing_Dir", 4);
-            Debug.Log("좌측하단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
+            //Debug.Log("좌측하단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
         }
         //적이 플레이어보다 상단에 존재할경우
         if (player_Vec_X == target_Vec_X && player_Vec_Y < target_Vec_Y)
         {
             anim.SetInteger("Swing_Dir", 6);
-            Debug.Log("상단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
+            //.Log("상단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
         }
         //적이 플레이어보다 하단에 존재할경우
         if (player_Vec_X < target_Vec_X && player_Vec_Y == target_Vec_Y)
         {
             anim.SetInteger("Swing_Dir", 3);
 
-            Debug.Log("하단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
+           // Debug.Log("하단 내 위치 :" + transform.position + "상대 위치 :" + enemy_Vec);
         }
 
     }
     private void Player_Anim()
     {
         rigid.velocity = new Vector2(player_Move_X * player_Move_Speed, player_Move_Y * player_Move_Speed);
+        if (player_Move_X != 0 || player_Move_Y != 0)
+        {
+            StartCoroutine(Move_Sound());
+        }
+        else if (player_Move_X == 0 || player_Move_Y == 0)
+        {
+            SoundManager.Instance.Stop_Sound_Effect("Move_Player");
+            SoundManager.Instance.Stop_Sound_Effect("Run_Player");
+        }
+
 
         if (anim.GetInteger("Move_X") != player_Move_X)
         {
@@ -352,6 +415,7 @@ public class Player : MonoBehaviour
                 anim.SetTrigger("Root_B");
                 isAction = true;
                 anim.SetBool("isAction", true);
+                SoundManager.Instance.Play_Sound_Effect("Collect_Witch_Flower");
                 yield return new WaitForSeconds(1f);
                 isAction = false;
                 anim.SetBool("isAction", false);
@@ -387,9 +451,11 @@ public class Player : MonoBehaviour
                 anim.SetTrigger("Root_A");
                 isAction = true;
                 anim.SetBool("isAction", true);
+                SoundManager.Instance.Play_Sound_Effect("Collect_Branch");
                 yield return new WaitForSeconds(0.2f);
                 isAction = false;
                 anim.SetBool("isAction", false);
+                isTree = false;
                 break;
         }
     }
@@ -415,6 +481,10 @@ public class Player : MonoBehaviour
             collision_Target = collision;
         }  
         if (collision.CompareTag("Witch_Obj_Loster"))
+        {
+            collision_Target = collision;
+        }
+        if (collision.CompareTag("NPC"))
         {
             collision_Target = collision;
         }

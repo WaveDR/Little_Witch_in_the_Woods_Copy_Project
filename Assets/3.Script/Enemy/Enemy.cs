@@ -34,6 +34,10 @@ public class Enemy : MonoBehaviour
 
     private CircleCollider2D circle;
 
+
+    [SerializeField] private string spawn_Sound;
+    [SerializeField] private string collect_Sound;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -147,7 +151,7 @@ public class Enemy : MonoBehaviour
             sprite.flipX = false;
         }
 
-
+    
         yield return new WaitForSeconds(0.3f);
 
         anim.SetBool("isMove", false);
@@ -244,6 +248,7 @@ public class Enemy : MonoBehaviour
                 Inventory_Manager.Instance.Update_Item_Idx();
                 enemy_MoveSpeed = 0;
                 anim.SetTrigger("Enemy_Hunt");
+                SoundManager.Instance.Play_Sound_Effect("Collect_MongSiri");
                 yield return new WaitForSeconds(1.5f);
                 isHunt = false;
                 isCollect = true;
@@ -251,7 +256,7 @@ public class Enemy : MonoBehaviour
                 break;
 
             case Enemy_Type.Witch_Flower:
-
+                
                 Inventory_Manager.Instance.item_Index.Add(item_Data.mixture_index);
                 Inventory_Manager.Instance.Update_Item_Idx();
                 anim.SetBool("Plant_Collect", true);
@@ -263,7 +268,9 @@ public class Enemy : MonoBehaviour
             case Enemy_Type.BushBug:
                 Inventory_Manager.Instance.item_Index.Add(item_Data.mixture_index);
                 Inventory_Manager.Instance.Update_Item_Idx();
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.3f);
+                SoundManager.Instance.Play_Sound_Effect(collect_Sound);
+                yield return new WaitForSeconds(0.7f);
                 gameObject.SetActive(false);
                 break;
 
@@ -300,6 +307,8 @@ public class Enemy : MonoBehaviour
         if (curPos == Move_Point)
         {
             anim.SetBool("Escape_Sucess", true);
+            SoundManager.Instance.Play_Sound_Effect("Escape_MongSiri");
+            enemySpawn.isSpawn = true;
             yield return new WaitForSeconds(2f);
             gameObject.SetActive(false);
         }

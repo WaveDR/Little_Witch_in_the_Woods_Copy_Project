@@ -390,7 +390,7 @@ public class Inventory_Manager : MonoBehaviour
             {
                 if (item_Index[item_Index.Count - 1] == inventory_Type_List[i])
                 {
-                    Debug.Log($"중복인 숫자 : {inventory_Type_List[i]}");
+                    //Debug.Log($"중복인 숫자 : {inventory_Type_List[i]}");
                     inventory_Count_List[i]++;
                 }
 

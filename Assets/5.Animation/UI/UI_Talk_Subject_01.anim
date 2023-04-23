@@ -22,7 +22,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -73.2
+        value: -12.900009
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -31,35 +31,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: -34.4
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Quest_Talk
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: -7.2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.16666667
-        value: -15.2
+        value: -23.9
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -70,7 +42,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Quest_Talk
+    path: Talk_File/Player_DialLog_Tag/Just_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -98,7 +70,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Just_Talk
+    path: Talk_File/Player_DialLog_Tag/Just_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -106,7 +78,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -12.900009
+        value: -7.2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -115,7 +87,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: -23.9
+        value: -15.2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -126,7 +98,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Just_Talk
+    path: Talk_File/Player_DialLog_Tag/Quest_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -134,7 +106,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -1.7385216
+        value: -73.2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -143,7 +115,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: 30.4
+        value: -34.4
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -154,7 +126,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Private_Talk
+    path: Talk_File/Player_DialLog_Tag/Quest_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -182,7 +154,35 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Private_Talk
+    path: Talk_File/Player_DialLog_Tag/Private_Talk
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1.7385216
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.16666667
+        value: 30.4
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_AnchoredPosition.y
+    path: Talk_File/Player_DialLog_Tag/Private_Talk
     classID: 224
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -194,43 +194,43 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1798880158
-      attribute: 538195251
-      script: {fileID: 0}
-      typeID: 224
-      customType: 28
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1798880158
+      path: 1917836056
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 56887932
+      path: 1917836056
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 56887932
+      path: 563492110
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 325779807
+      path: 563492110
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 325779807
+      path: 1747611596
       attribute: 1460864421
+      script: {fileID: 0}
+      typeID: 224
+      customType: 28
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1747611596
+      attribute: 538195251
       script: {fileID: 0}
       typeID: 224
       customType: 28
@@ -262,7 +262,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -73.2
+        value: -12.900009
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -271,35 +271,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: -34.4
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Quest_Talk
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: -7.2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.16666667
-        value: -15.2
+        value: -23.9
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -310,7 +282,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Quest_Talk
+    path: Talk_File/Player_DialLog_Tag/Just_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -338,7 +310,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Just_Talk
+    path: Talk_File/Player_DialLog_Tag/Just_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -346,7 +318,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -12.900009
+        value: -7.2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -355,7 +327,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: -23.9
+        value: -15.2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -366,7 +338,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Just_Talk
+    path: Talk_File/Player_DialLog_Tag/Quest_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -374,7 +346,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -1.7385216
+        value: -73.2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -383,7 +355,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: 30.4
+        value: -34.4
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -394,7 +366,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Private_Talk
+    path: Talk_File/Player_DialLog_Tag/Quest_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -422,7 +394,35 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Private_Talk
+    path: Talk_File/Player_DialLog_Tag/Private_Talk
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1.7385216
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.16666667
+        value: 30.4
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_AnchoredPosition.y
+    path: Talk_File/Player_DialLog_Tag/Private_Talk
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []

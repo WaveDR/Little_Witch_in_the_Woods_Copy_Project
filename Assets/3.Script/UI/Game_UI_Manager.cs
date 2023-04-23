@@ -96,11 +96,30 @@ public class Game_UI_Manager : MonoBehaviour
 
     [SerializeField] private RectTransform HUD_Witch_Loster_Move_Icon;
 
+    //----------------------------------------------------------------------------------------------------------
 
+    [SerializeField] private int select_Num =1;
+    public int Select_Num
+    {
+        get { return select_Num; }
+
+        set
+        {
+            select_Num = value;
+            select_Num = Mathf.Clamp(select_Num, 0, 2);
+        }
+    }
+    [SerializeField] private GameObject select_File;
+    [SerializeField] private GameObject talk_File;
+    [SerializeField] private Text talk_Text;
+    public bool select_trigger;
 
     public Smoke_Anim smoke_Anim;
 
     public int source_Index;
+
+    public Image npc_Image;
+    public Image player_Image;
     // Start is called before the first frame update
     void Awake()
     {
@@ -144,6 +163,7 @@ public class Game_UI_Manager : MonoBehaviour
         HUD_Press.SetActive(false);
         HUD_Witch_Juicer.SetActive(false);
         HUD_Witch_Pot.SetActive(false);
+        talk_File.SetActive(false);
     }
     // Update is called once per frame
     void Update()
@@ -232,15 +252,17 @@ public class Game_UI_Manager : MonoBehaviour
         }
      
 
-        if (player_UI_Book_On || player_UI_Quest_On || player_UI_Pot || player_UI_Juicer || player_UI_Loster)
+        if (player_UI_Book_On || player_UI_Quest_On || player_UI_Pot || player_UI_Juicer || player_UI_Loster || select_trigger)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                Select_Num++;
                 UI_Page_Move_X = 0;
                 UI_Page_Move_Y++;
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                Select_Num--;
                 UI_Page_Move_X = 0;
                 UI_Page_Move_Y--;
             }
@@ -261,7 +283,62 @@ public class Game_UI_Manager : MonoBehaviour
         Witch_Juicer();
         Witch_Pot();
         Witch_Loster();
+        Select_Subject();
+    }
 
+    void Select_Subject()
+    {
+        if (select_trigger)
+        {
+            select_File.SetActive(true);
+            talk_File.SetActive(true);
+
+            anim.SetBool("Select", select_trigger);
+            anim.SetInteger("Select_Num", Select_Num);
+
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.X))
+            {
+                talk_File.SetActive(false);
+                select_File.SetActive(false) ;
+                select_trigger = false;
+                Select_Num = 1;
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Talk(select_Num, select_trigger);
+                select_File.SetActive(false);
+            }
+          
+        }
+        else
+        {
+                talk_File.SetActive(false);
+                select_File.SetActive(false);
+                select_trigger = false;
+                Select_Num = 1;
+        }
+    }
+    void Talk(int id, bool isNpc)
+    {
+        string talkData =  Talk_Manager.Instance.GetTalk(id,Talk_Manager.Instance.next_Count);
+
+        talk_Text.text = "무슨 일로 왔니?";
+        if (talkData == null)
+        {
+            select_trigger = false;
+            Talk_Manager.Instance.next_Count = 0;
+            return;
+            
+        }
+        if (isNpc)
+        {
+            talk_Text.text = talkData.Split(':')[0];
+            npc_Image.sprite = Talk_Manager.Instance.GetPortait(id, int.Parse(talkData.Split(':')[1]));
+        
+
+        }
+        select_trigger = true;
+        Talk_Manager.Instance.next_Count++;
     }
     void Move_Pos_Limit()
     {
@@ -772,5 +849,5 @@ public class Game_UI_Manager : MonoBehaviour
         string days_Str = string.Format("{0:D2}", days);
         HUD_Text_Days.text = $"{days_Str} {Day_week_Str}";
     }
-    
+
 }

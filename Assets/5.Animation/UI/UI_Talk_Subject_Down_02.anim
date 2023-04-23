@@ -42,7 +42,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Just_Talk
+    path: Talk_File/Player_DialLog_Tag/Just_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -70,7 +70,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Just_Talk
+    path: Talk_File/Player_DialLog_Tag/Just_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -98,7 +98,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Private_Talk
+    path: Talk_File/Player_DialLog_Tag/Private_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -126,7 +126,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Private_Talk
+    path: Talk_File/Player_DialLog_Tag/Private_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -154,7 +154,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Quest_Talk
+    path: Talk_File/Player_DialLog_Tag/Quest_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -182,7 +182,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Quest_Talk
+    path: Talk_File/Player_DialLog_Tag/Quest_Talk
     classID: 224
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -194,42 +194,42 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 56887932
+      path: 1917836056
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 56887932
+      path: 1917836056
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 325779807
+      path: 1747611596
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 325779807
+      path: 1747611596
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1798880158
+      path: 563492110
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1798880158
+      path: 563492110
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
@@ -282,7 +282,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Just_Talk
+    path: Talk_File/Player_DialLog_Tag/Just_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -310,7 +310,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Just_Talk
+    path: Talk_File/Player_DialLog_Tag/Just_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -338,7 +338,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Private_Talk
+    path: Talk_File/Player_DialLog_Tag/Private_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -366,7 +366,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Private_Talk
+    path: Talk_File/Player_DialLog_Tag/Private_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -394,7 +394,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Player_DialLog_Tag/Quest_Talk
+    path: Talk_File/Player_DialLog_Tag/Quest_Talk
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -422,7 +422,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Player_DialLog_Tag/Quest_Talk
+    path: Talk_File/Player_DialLog_Tag/Quest_Talk
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []

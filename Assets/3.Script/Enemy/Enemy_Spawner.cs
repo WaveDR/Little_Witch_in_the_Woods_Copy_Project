@@ -9,6 +9,7 @@ public class Enemy_Spawner : MonoBehaviour
         Tree, MongSiri_Hole, Apple, BushBug
     }
     public Spawner_Type type;
+    public Player player;
     //============================================= °ø¿ë
     [SerializeField] private GameObject enemy_Prefab;
     [SerializeField] private Vector2 poolPos;
@@ -18,7 +19,7 @@ public class Enemy_Spawner : MonoBehaviour
     private Enemy[] enemy_Components;
     public int spawnEnemy_Count;
     private int nextCount;
-    bool isSpawn;
+   public bool isSpawn;
     //============================================= Åä³¢±¼ 
     private bool isLookAt_to_Spanwer = false;
     public bool failling = false;
@@ -29,8 +30,10 @@ public class Enemy_Spawner : MonoBehaviour
     public Animator anim;
     private bool player_In_Interaction_Area = false;
     // Start is called before the first frame update
+
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         TryGetComponent(out anim);
         enemy_Components = new Enemy[spawnEnemy_Count];
         enemys = new GameObject[spawnEnemy_Count];
@@ -89,7 +92,7 @@ public class Enemy_Spawner : MonoBehaviour
                     }
                 }
 
-                else if (!isLookAt_to_Spanwer)
+                else if (!isLookAt_to_Spanwer && !isSpawn)
                 {
                     for (int i = 0; i < enemy_Components.Length; i++)
                     {
@@ -97,6 +100,7 @@ public class Enemy_Spawner : MonoBehaviour
                         {
                             enemy_Components[i].isLookAt = false;
                             enemy_Components[i].StartCoroutine("Enemy_Escape");
+
                         }
                     }
                 }
@@ -112,8 +116,10 @@ public class Enemy_Spawner : MonoBehaviour
                         Vector2 faillingPos = new Vector2(enemys[i].transform.position.x, transform.localPosition.y - 3f);
                         enemys[i].transform.position = Vector3.MoveTowards(enemys[i].transform.position, faillingPos, rand_Falling * Time.deltaTime);
                         anim.SetBool("isInteraction", false);
+                       
                         charge_Button_Count = 0;
                         box.enabled = false;
+
                     }
                 }
                 break;
