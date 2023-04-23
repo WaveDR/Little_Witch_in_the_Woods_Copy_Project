@@ -120,6 +120,8 @@ public class Game_UI_Manager : MonoBehaviour
 
     public Image npc_Image;
     public Image player_Image;
+
+    //==========================================================================================================
     // Start is called before the first frame update
     void Awake()
     {
@@ -179,6 +181,8 @@ public class Game_UI_Manager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.S) && !player_UI_Quest_On)
         {
+            SoundManager.Instance.Play_Sound_Effect("Inventory_Bag");
+
             Inventory_Select_Reset();
             UI_Page_Move_X = 0;
             UI_Page_Move_Y = 0;
@@ -193,6 +197,7 @@ public class Game_UI_Manager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.D) && !player_UI_Quest_On)
         {
+            SoundManager.Instance.Play_Sound_Effect("Inventory_Diary");
             Inventory_Select_Reset();
             UI_Page_Move_X = 0;
             UI_Page_Move_Y = 0;
@@ -229,23 +234,29 @@ public class Game_UI_Manager : MonoBehaviour
         }
         Tool_SetActive(tool_Array, player_UI_Tool_Change);
         Tool_SetActive(potion_Array, player_UI_Potion_Change);
+
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
+                SoundManager.Instance.Play_Sound_Effect("Inventory_NextPage");
             player_UI_Tool_Change--;
             anim.SetTrigger("Tool_Left");
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
+                SoundManager.Instance.Play_Sound_Effect("Inventory_NextPage");
             anim.SetTrigger("Tool_Right");
             player_UI_Tool_Change++;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
+                SoundManager.Instance.Play_Sound_Effect("Inventory_NextPage");
             anim.SetTrigger("Potion_Left");
             player_UI_Potion_Change--;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+                SoundManager.Instance.Play_Sound_Effect("Inventory_NextPage");
             anim.SetTrigger("Potion_Right");
             player_UI_Potion_Change++;
 
@@ -256,22 +267,26 @@ public class Game_UI_Manager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                SoundManager.Instance.Play_Sound_Effect("Inventory_NextPage");
                 Select_Num++;
                 UI_Page_Move_X = 0;
                 UI_Page_Move_Y++;
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                SoundManager.Instance.Play_Sound_Effect("Inventory_NextPage");
                 Select_Num--;
                 UI_Page_Move_X = 0;
                 UI_Page_Move_Y--;
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                SoundManager.Instance.Play_Sound_Effect("Inventory_NextPage");
                 UI_Page_Move_X--;
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
+                SoundManager.Instance.Play_Sound_Effect("Inventory_NextPage");
                 UI_Page_Move_X++;
             }
         
@@ -704,6 +719,7 @@ public class Game_UI_Manager : MonoBehaviour
                 {
                     player.anim.SetTrigger("Juicer");
                     witch_Juicer.Ingreadient_Trade(source, ref count);
+                    SoundManager.Instance.Play_Sound_Effect("Witch_Juicer_Action");
 
                     Inventory_Manager.Instance.Update_Item_Idx();
                     Inventory_Manager.Instance.inventory_Count_List[source_Index] = count;
@@ -736,6 +752,7 @@ public class Game_UI_Manager : MonoBehaviour
 
                     if (witch_Pot.Make_Potion_Number(count))
                     {
+                        SoundManager.Instance.Play_Sound_Effect("Witch_Pot_Success");
                         smoke_Anim.Sucess_Smoke();
                         Debug.LogError("성공");
                         smoke_Anim.Invoke("Bale_Smoke_off", 2);
@@ -744,6 +761,8 @@ public class Game_UI_Manager : MonoBehaviour
                     }
                     if (!witch_Pot.Make_Potion_Number(count))
                     {
+                        SoundManager.Instance.Play_Sound_Effect("Witch_Pot_Fail");
+                        SoundManager.Instance.Play_Sound_Effect("Witch_Pot_Fail_Boom");
                         smoke_Anim.Sucess_Smoke_Out();
                         player.anim.SetTrigger("Failed");
                         Debug.LogError("실패");

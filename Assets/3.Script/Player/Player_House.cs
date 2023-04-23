@@ -21,6 +21,7 @@ public class Player_House : MonoBehaviour
             camera_chain = true;
             Game_UI_Manager.Instance.anim.SetTrigger("FadeOut");
             transform.position = new Vector3(House_Pos.position.x, House_Pos.position.y);
+            SoundManager.Instance.Play_Sound_Effect("Witch_Input_House");
         }
 
         if (collision.CompareTag("Witch_House_In_Door"))
@@ -34,6 +35,8 @@ public class Player_House : MonoBehaviour
         {
             under_Ground = true;
             Game_UI_Manager.Instance.anim.SetTrigger("FadeOut");
+            SoundManager.Instance.Play_Sound_Effect("Witch_Input_Under_Ground");
+
             transform.position = new Vector3(Under_Pos.position.x, Under_Pos.position.y);
         }
         if (collision.CompareTag("Witch_House_Elevaiter_Under"))

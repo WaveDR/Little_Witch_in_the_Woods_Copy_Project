@@ -189,13 +189,13 @@ public class Player : MonoBehaviour
                 if (collision_Target.CompareTag("Witch_Obj_Juicer") )
                 {
                     Object_Witch witch_Tool = collision_Target.GetComponent<Object_Witch>();
-
+                    SoundManager.Instance.Play_Sound_Effect("Witch_Juicer_Open");
                     witch_Tool.Witch_UI();
                 }
                 if (collision_Target.CompareTag("Witch_Obj_Pot"))
                 {
                     Object_Witch witch_Tool = collision_Target.GetComponent<Object_Witch>();
-
+                    SoundManager.Instance.Play_Sound_Effect("Witch_Pot_Open");
                     witch_Tool.Witch_UI();
                 }
                 if (collision_Target.CompareTag("Witch_Obj_Loster"))
@@ -356,12 +356,12 @@ public class Player : MonoBehaviour
         rigid.velocity = new Vector2(player_Move_X * player_Move_Speed, player_Move_Y * player_Move_Speed);
         if (player_Move_X != 0 || player_Move_Y != 0)
         {
-            StartCoroutine(Move_Sound());
+          //  StartCoroutine(Move_Sound());
         }
         else if (player_Move_X == 0 || player_Move_Y == 0)
         {
-            SoundManager.Instance.Stop_Sound_Effect("Move_Player");
-            SoundManager.Instance.Stop_Sound_Effect("Run_Player");
+          //  SoundManager.Instance.Stop_Sound_Effect("Move_Player");
+          //  SoundManager.Instance.Stop_Sound_Effect("Run_Player");
         }
 
 
@@ -441,6 +441,7 @@ public class Player : MonoBehaviour
                 anim.SetTrigger("Root_A");
                 isAction = true;
                 anim.SetBool("isAction", true);
+                SoundManager.Instance.Play_Sound_Effect("Collect_Pumpkin_Dog");
                 yield return new WaitForSeconds(1.4f);
                 isAction = false;
                 anim.SetBool("isAction", false);
@@ -457,6 +458,32 @@ public class Player : MonoBehaviour
                 anim.SetBool("isAction", false);
                 isTree = false;
                 break;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Woods"))
+        {
+            if (!SoundManager.Instance.audio_Source_Effects[0].isPlaying)
+            {
+                SoundManager.Instance.Stop_Sound_Effect("UnderGround_BGM");
+                SoundManager.Instance.Play_Sound_BGM("Woods_BGM");
+                SoundManager.Instance.Play_Sound_BGM("Bird_BGM");
+            }
+        }
+
+        if (collision.CompareTag("Under_Ground"))
+        {
+            if (!SoundManager.Instance.audio_Source_Effects[2].isPlaying)
+            {
+                SoundManager.Instance.Stop_Sound_Effect("Woods_BGM");
+                SoundManager.Instance.Stop_Sound_Effect("Bird_BGM");
+                SoundManager.Instance.Play_Sound_BGM("UnderGround_BGM"); 
+            }
+        }
+        if (collision.CompareTag("Witch_Obj_Loster"))
+        {
+            SoundManager.Instance.Play_Sound_BGM("Witch_Loster_Open"); 
         }
     }
 

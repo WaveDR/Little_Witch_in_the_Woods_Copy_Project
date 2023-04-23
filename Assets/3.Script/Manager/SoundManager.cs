@@ -38,6 +38,7 @@ public class SoundManager : MonoBehaviour
     public Sound[] sounds_Effect;
     public Sound[] sounds_BGM;
     public string[] play_Sound_Name;
+    public bool isPlay = false;
     private void OnEnable()
     {
 
@@ -50,7 +51,7 @@ public class SoundManager : MonoBehaviour
     {
         for (int i = 0; i < sounds_Effect.Length; i++)
         {
-            if ((_Name) == sounds_Effect[i].name)
+            if (_Name == sounds_Effect[i].name)
             {
                 for (int j = 0; j < audio_Source_Effects.Length; j++)
                 {
@@ -71,6 +72,32 @@ public class SoundManager : MonoBehaviour
             Debug.Log(_Name + "사운드가 SoundManager에 등록되지 않았습니다");
         }
 
+    }
+    public void Play_Sound_BGM(string _Name)
+    {
+
+        for (int i = 0; i < sounds_BGM.Length; i++)
+        {
+            if (_Name == sounds_BGM[i].name)
+            {
+                for (int j = 0; j < audio_Source_Effects.Length; j++)
+                {
+                    if (!audio_Source_Effects[j].isPlaying)
+                    {
+                        play_Sound_Name[j] = sounds_BGM[i].name;
+
+
+                        audio_Source_Effects[j].clip = sounds_BGM[i].clip;
+                        audio_Source_Effects[j].Play();
+
+                        return;
+                    }
+                }
+                Debug.Log("모든 가용 AudttioSource가 사용 중입니다.");
+                return;
+            }
+            Debug.Log(_Name + "사운드가 SoundManager에 등록되지 않았습니다");
+        }
     }
     public void Stop_All_Sound_Effect()
     {

@@ -23,6 +23,8 @@ TagManager:
   - Witch_House_Elevaiter
   - Witch_House_Elevaiter_Under
   - NPC
+  - Woods
+  - Under_Ground
   layers:
   - Default
   - TransparentFX
