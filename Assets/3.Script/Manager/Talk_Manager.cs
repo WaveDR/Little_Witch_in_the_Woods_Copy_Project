@@ -10,8 +10,15 @@ public class Talk_Manager : MonoBehaviour
 
     public Sprite[] pot_Array;
     public int next_Count;
+
+    public int quest_Potion_Num;
+    public int potion_Num;
+    [SerializeField] private Potion[] potion_info;
+    [SerializeField] private GameObject[] rand_Quest;
+
     private void Awake()
     {
+        quest_Potion_Num = Random.Range(0, 4);
         if (Instance == null)
         {
             Instance = this;
@@ -23,6 +30,38 @@ public class Talk_Manager : MonoBehaviour
         talk_Data = new Dictionary<int, string[]>();
         pot_Data = new Dictionary<int, Sprite>();
         GenerateData();
+    }
+    public void Trade_Potion()
+    {
+
+        quest_Potion_Num = Random.Range(0, 4);
+    }
+    private void Update()
+    {
+
+        for (int i = 0; i < rand_Quest.Length; i++)
+        {
+            rand_Quest[i].SetActive(true);
+            if(i != quest_Potion_Num)
+            {
+                rand_Quest[i].SetActive(false);
+            }
+        }
+        switch (quest_Potion_Num)
+        {
+            case 0:
+                potion_Num = potion_info[0].mixture_index;
+                break;
+            case 1:
+                potion_Num = potion_info[1].mixture_index;
+                break;
+            case 2:
+                potion_Num = potion_info[2].mixture_index;
+                break;
+            case 3:
+                potion_Num = potion_info[3].mixture_index;
+                break;
+        }
     }
 
     void GenerateData()
@@ -51,20 +90,21 @@ public class Talk_Manager : MonoBehaviour
 
         talk_Data.Add(1, new string[] { 
             "이 숲은 정말 평화로운 것 같아요! : 0",
-            "엿이나 먹으라지.. 빌어먹을 자연 : 2",
-            "에우레아님은 자연을 정말 싫어하시네요. : 2",
-            "지겨워 죽겠어. 시끄럽게 우는 벌레나 \n 길을 잃는 상황도 정말 최악이야. : 2",
-            "그래도 월계수잎은 필요하신거죠? : 2",
+            "엿이나 먹으라지.. 빌어먹을 자연 : 3",
+            "에우레아님은 자연을 정말 싫어하시네요. : 3",
+            "지겨워 죽겠어. 시끄럽게 우는 벌레나 \n 길을 잃는 상황도 정말 최악이야. : 3",
+            "그래도 월계수잎은 필요하신거죠? : 3",
             "....응 : 3"});
 
 
 
 
-      talk_Data.Add(2, new string[] { "오늘의 납품 목록은 이거야! : 0" });
-
-
+      talk_Data.Add(2, new string[] { "오늘의 납품 목록은 이거야! : 2" });
 
     }
+
+   
+
 
     public Sprite GetPortait(int id, int pot_index)
     {

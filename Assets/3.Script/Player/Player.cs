@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
     {
         if (!Game_UI_Manager.Instance.player_UI_Quest_On && !Game_UI_Manager.Instance.player_UI_Book_On && !Game_UI_Manager.Instance.player_UI_Inventory_On 
           && !Game_UI_Manager.Instance.player_UI_Juicer && !Game_UI_Manager.Instance.player_UI_Loster && !Game_UI_Manager.Instance.player_UI_Pot
-          && !Game_UI_Manager.Instance.select_trigger)
+          && !Game_UI_Manager.Instance.select_trigger && !Game_UI_Manager.Instance.player_UI_Quest)
         {
             player_Move_X = Input.GetAxisRaw("Horizontal");
             player_Move_Y = Input.GetAxisRaw("Vertical");
@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
 
         if (isAction ||Game_UI_Manager.Instance.player_UI_Quest_On || Game_UI_Manager.Instance.player_UI_Book_On || Game_UI_Manager.Instance.player_UI_Inventory_On
             || Game_UI_Manager.Instance.player_UI_Juicer || Game_UI_Manager.Instance.player_UI_Loster || Game_UI_Manager.Instance.player_UI_Pot || Game_UI_Manager.Instance.select_trigger
+            || Game_UI_Manager.Instance.player_UI_Quest
             )
         {
            

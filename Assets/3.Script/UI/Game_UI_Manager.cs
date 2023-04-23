@@ -7,6 +7,7 @@ public class Game_UI_Manager : MonoBehaviour
 {
     public static Game_UI_Manager Instance = null;
 
+    public int player_Coin = 0;
     public Object_Witch witch_Juicer;
     public Object_Witch witch_Pot;
     public Object_Witch witch_Loster;
@@ -41,6 +42,7 @@ public class Game_UI_Manager : MonoBehaviour
     [SerializeField] private Image HUD_Juicer_Press_Bar;
     [SerializeField] private Image HUD_Pot_Press_Bar;
     [SerializeField] private Image HUD_Loster_Press_Bar;
+    [SerializeField] private Image HUD_Quest_Press_Bar;
 
 
     public Animator anim;
@@ -61,6 +63,9 @@ public class Game_UI_Manager : MonoBehaviour
     public bool player_UI_Pot;
     public bool player_UI_Juicer;
     public bool player_UI_Loster;
+
+
+    public bool player_UI_Quest;
 
 
     //플레이어 포션 선택 및 던지기
@@ -111,7 +116,10 @@ public class Game_UI_Manager : MonoBehaviour
     }
     [SerializeField] private GameObject select_File;
     [SerializeField] private GameObject talk_File;
+    [SerializeField] private GameObject quest_File;
     [SerializeField] private Text talk_Text;
+
+    [SerializeField] private Text goldCoin;
     public bool select_trigger;
 
     public Smoke_Anim smoke_Anim;
@@ -122,12 +130,15 @@ public class Game_UI_Manager : MonoBehaviour
     public Image player_Image;
 
     //==========================================================================================================
+
+
     // Start is called before the first frame update
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -153,9 +164,7 @@ public class Game_UI_Manager : MonoBehaviour
         HUD_Juicer_Press_Bar = GameObject.FindGameObjectWithTag("UI_Juicer").GetComponent<Image>();
         HUD_Pot_Press_Bar = GameObject.FindGameObjectWithTag("UI_Pot").GetComponent<Image>();
         HUD_Loster_Press_Bar = GameObject.FindGameObjectWithTag("UI_Lost").GetComponent<Image>();
-
-
-        DontDestroyOnLoad(gameObject);
+        HUD_Quest_Press_Bar = GameObject.FindGameObjectWithTag("UI_Quest").GetComponent<Image>();
     }
 
     private void Start()
@@ -172,6 +181,7 @@ public class Game_UI_Manager : MonoBehaviour
     {
         Input_UI();
         player_HUD_Sync();
+        goldCoin.text = $"{player_Coin}";
     }
     void Input_UI()
     {
@@ -458,7 +468,33 @@ public class Game_UI_Manager : MonoBehaviour
         {
             anim.SetBool("Quest_Tab", false);
         }
-        
+
+        if (player_UI_Quest)
+        {
+            quest_File.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.X))
+            {
+                player_UI_Quest = false;
+                quest_File.SetActive(false);
+            }
+
+            int num = Talk_Manager.Instance.potion_Num;
+
+            int corresponding_Wish_Num = Inventory_Manager.Instance.inventory_Type_List.FindIndex(index => index == num);
+            int corresponding_Wish_Count = Inventory_Manager.Instance.inventory_Count_List[corresponding_Wish_Num];
+
+            if (corresponding_Wish_Count > 0)
+            {
+                Player_Press_Make(num, ref corresponding_Wish_Count);
+            }
+
+        }
+        else if (!player_UI_Quest)
+        {
+            quest_File.SetActive(false);
+        }
+
     }
     void Book_SetActive()
     {
@@ -770,6 +806,16 @@ public class Game_UI_Manager : MonoBehaviour
                         Inventory_Manager.Instance.pot_idx = 0;
                     }
                 }
+                else if (player_UI_Quest)
+                {
+                    //교환하는거 만들기
+                    //1. 해당하는 아이템 삭제
+                    //2. 플레이어에게 코인 30개 주기
+                    //3. 누르는 타임 0으로 설정
+                    //단, talk 매니저에서 있는 요소들을 적극적으로 사용하여 구현하기
+                    
+                    player_Coin += 30;
+                }
             }
 
             if (player_UI_Juicer)
@@ -785,6 +831,10 @@ public class Game_UI_Manager : MonoBehaviour
                 HUD_Loster_Press_Bar.fillAmount = time / 3;
             }
 
+            if (player_UI_Quest)
+            {
+                HUD_Loster_Press_Bar.fillAmount = time / 3;
+            }
         }
         else if (count < 2)
         {

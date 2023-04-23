@@ -25,6 +25,7 @@ TagManager:
   - NPC
   - Woods
   - Under_Ground
+  - UI_Quest
   layers:
   - Default
   - TransparentFX
