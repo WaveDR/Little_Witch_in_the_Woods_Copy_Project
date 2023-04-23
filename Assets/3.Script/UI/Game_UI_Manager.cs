@@ -324,6 +324,7 @@ public class Game_UI_Manager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.X))
             {
                 talk_File.SetActive(false);
+                anim.SetBool("Select", false);
                 select_File.SetActive(false) ;
                 select_trigger = false;
                 Select_Num = 1;
@@ -350,16 +351,26 @@ public class Game_UI_Manager : MonoBehaviour
         talk_Text.text = "무슨 일로 왔니?";
         if (talkData == null)
         {
-            select_trigger = false;
-            Talk_Manager.Instance.next_Count = 0;
-            return;
+            if(id == 2)
+            {
+                player_UI_Quest = true;
+                talk_File.SetActive(false);
+                Talk_Manager.Instance.next_Count = 0;
+                return;
+            }
+            else
+            {
+                select_trigger = false;
+                Talk_Manager.Instance.next_Count = 0;
+                return;
+            }
+         
             
         }
-        if (isNpc)
+        if (isNpc && !player_UI_Quest)
         {
             talk_Text.text = talkData.Split(':')[0];
             npc_Image.sprite = Talk_Manager.Instance.GetPortait(id, int.Parse(talkData.Split(':')[1]));
-        
 
         }
         select_trigger = true;
@@ -482,19 +493,22 @@ public class Game_UI_Manager : MonoBehaviour
             int num = Talk_Manager.Instance.potion_Num;
 
             int corresponding_Wish_Num = Inventory_Manager.Instance.inventory_Type_List.FindIndex(index => index == num);
-            int corresponding_Wish_Count = Inventory_Manager.Instance.inventory_Count_List[corresponding_Wish_Num];
+            int corresponding_Wish_Count;
 
-            if (corresponding_Wish_Count > 0)
+            if(corresponding_Wish_Num >= 0)
             {
-                Player_Press_Make(num, ref corresponding_Wish_Count);
-            }
+                corresponding_Wish_Count = Inventory_Manager.Instance.inventory_Count_List[corresponding_Wish_Num];
 
+                if(corresponding_Wish_Count > 0)
+                {
+                    Player_Press_Make(corresponding_Wish_Num, ref corresponding_Wish_Count);
+                }
+            }
         }
         else if (!player_UI_Quest)
         {
             quest_File.SetActive(false);
         }
-
     }
     void Book_SetActive()
     {
@@ -727,6 +741,7 @@ public class Game_UI_Manager : MonoBehaviour
             if (source_Index == -1) return;
 
             int source_Count = Inventory_Manager.Instance.inventory_Count_List[source_Index];
+
             Player_Press_Make(num, ref source_Count);
         }
         else
@@ -813,8 +828,25 @@ public class Game_UI_Manager : MonoBehaviour
                     //2. 플레이어에게 코인 30개 주기
                     //3. 누르는 타임 0으로 설정
                     //단, talk 매니저에서 있는 요소들을 적극적으로 사용하여 구현하기
+
+                    // Inventory_Manager.Instance.inventory_Count_List.RemoveAt(source);
+                    Inventory_Manager.Instance.inventory_Type_List.RemoveAt(source);
+                    SoundManager.Instance.Play_Sound_Effect("Witch_Quest_Complete");
+
                     
+                    Inventory_Manager.Instance.inventory_Count_List[source_Index] = 0;
+                    Inventory_Manager.Instance.Update_Item_Idx();
+                    Inventory_Manager.Instance.Update_Text();
+
+                    time = 0;
                     player_Coin += 30;
+
+
+                    talk_File.SetActive(false);
+                    player_UI_Quest = false;
+                    select_trigger = false;
+                    Talk_Manager.Instance.Trade_Potion();
+                    return;
                 }
             }
 

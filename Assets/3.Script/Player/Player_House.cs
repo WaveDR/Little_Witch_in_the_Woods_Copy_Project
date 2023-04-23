@@ -28,6 +28,8 @@ public class Player_House : MonoBehaviour
         {
             camera_chain = false;
             Game_UI_Manager.Instance.anim.SetTrigger("FadeOut");
+            SoundManager.Instance.Play_Sound_Effect("Witch_Input_House");
+       
             transform.position = new Vector3(Door_Pos.position.x, Door_Pos.position.y);
         }
 
@@ -43,6 +45,8 @@ public class Player_House : MonoBehaviour
         {
             under_Ground = false;  
             Game_UI_Manager.Instance.anim.SetTrigger("FadeOut");
+            SoundManager.Instance.Play_Sound_Effect("Witch_Input_Under_Ground");
+
             transform.position = new Vector3(House_Pos.position.x, House_Pos.position.y);
         }
     }
