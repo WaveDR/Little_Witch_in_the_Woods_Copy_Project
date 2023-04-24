@@ -358,7 +358,6 @@ public class Game_UI_Manager : MonoBehaviour
         string talkData =  Talk_Manager.Instance.GetTalk(id,Talk_Manager.Instance.next_Count);
 
         talk_Text.text = "무슨 일로 왔니?";
-        npc_Image.sprite = Talk_Manager.Instance.pot_Array[0];
         if (talkData == null)
         {
             if(id == 2)
@@ -627,7 +626,7 @@ public class Game_UI_Manager : MonoBehaviour
             }
 
             int potion_Index = witch_Pot.potion_Num;
-            Debug.Log(potion_Index);
+          //  Debug.Log(potion_Index);
             Player_Press_Make(1, ref potion_Index);
         }
         else
@@ -843,27 +842,93 @@ public class Game_UI_Manager : MonoBehaviour
                     player_Coin += 30;
                     SoundManager.Instance.Play_Sound_Effect("Witch_Quest_Complete");
 
-                    Inventory_Manager.Instance.UI_Position(Inventory_Manager.Instance.UI_Item_Icon_Prefabs[Inventory_Manager.Instance.inventory_Type_List[source]], Inventory_Manager.Instance.UI_Item_Local_Pos);
+                    int item_idx = Inventory_Manager.Instance.inventory_Type_List[source];
+                    int potion_idx = 0;
+                    if (item_idx > 40)
+                    {
+                        switch (item_idx)
+                        {
+                            //=============가공 재료
+                            case 100:
+                                potion_idx = 19;
+                                break;
+                            case 200:
+                                potion_idx = 20;
+                                break;
+                            case 300:
+                                potion_idx = 21;
+                                break;
+                            case 400:
+                                potion_idx = 22;
+                                break;
+                            case 500:
+                                potion_idx = 23;
+                                break;
+                            case 1000:
+                                potion_idx = 24;
+                                break;
+                            case 2000:
+                                potion_idx = 25;
+                                break;
+                            case 3000:
+                                potion_idx = 26;
+                                break;
+                            case 4000:
+                                potion_idx = 27;
+                                break;
+                            case 10000:
+                                potion_idx = 28;
+                                break;
+                            case 20000:
+                                potion_idx = 29;
+                                break;
+                            //============포션
 
-                    Inventory_Manager.Instance.item_Index.RemoveAll
-                        (num => num == Inventory_Manager.Instance.inventory_Type_List[source]);
+                            case 2401100:
+                                potion_idx = 30;
+                                break;
+                            case 3330200:
+                                potion_idx = 31;
+                                break;
+                            case 3511100:
+                                potion_idx = 32;
+                                break;
+                            case 1322300:
+                                potion_idx = 33;
+                                break;
+                            case 3411000:
+                                potion_idx = 34;
+                                break;
+                            case 3203400:
+                                potion_idx = 35;
+                                break;
+                            case 2310100:
+                                potion_idx = 36;
+                                break;
+                            case 2424500:
+                                potion_idx = 37;
+                                break;
+                        }
+                        Inventory_Manager.Instance.UI_Position(Inventory_Manager.Instance.UI_Item_Icon_Prefabs[potion_idx],
+                            Inventory_Manager.Instance.UI_Item_Local_Pos);
 
-                    Inventory_Manager.Instance.inventory_Count_List[count] = 0;
-                    Inventory_Manager.Instance.inventory_Type_List.RemoveAt(source);
+                        Inventory_Manager.Instance.item_Index.RemoveAll
+                            (num => num == Inventory_Manager.Instance.inventory_Type_List[source]);
 
-                    Inventory_Manager.Instance.Update_Item_Idx();
-                    Inventory_Manager.Instance.Inventory_Sort();
+                        Inventory_Manager.Instance.inventory_Count_List[count] = 0;
+                        Inventory_Manager.Instance.inventory_Type_List.RemoveAt(source);
 
+                        Inventory_Manager.Instance.Update_Item_Idx();
+                        Inventory_Manager.Instance.Inventory_Sort();
 
-
-                    Talk_Manager.Instance.Trade_Potion();
-                    talk_File.SetActive(false);
-                    player_UI_Quest = false;
-                    select_trigger = false;
-                    return;
+                        Talk_Manager.Instance.Trade_Potion();
+                        talk_File.SetActive(false);
+                        player_UI_Quest = false;
+                        select_trigger = false;
+                        return;
+                    }
                 }
             }
-
             if (player_UI_Juicer)
             {
                 HUD_Juicer_Press_Bar.fillAmount = time / 3;
