@@ -26,6 +26,7 @@ TagManager:
   - Woods
   - Under_Ground
   - UI_Quest
+  - Audio_Start
   layers:
   - Default
   - TransparentFX

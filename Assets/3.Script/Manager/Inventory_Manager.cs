@@ -88,7 +88,6 @@ public class Inventory_Manager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(UI_Item_Icon_Prefabs[32].transform.position);
         Inventory_Move_Method();
     }
 

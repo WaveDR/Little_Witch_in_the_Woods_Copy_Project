@@ -484,7 +484,7 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Witch_Obj_Loster"))
         {
-            SoundManager.Instance.Play_Sound_BGM("Witch_Loster_Open"); 
+            SoundManager.Instance.Play_Sound_Effect("Witch_Loster_Open"); 
         }
     }
 

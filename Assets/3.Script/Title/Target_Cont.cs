@@ -15,10 +15,15 @@ public class Target_Cont : MonoBehaviour
     [SerializeField] private int arrow_Move_Max;
     [SerializeField] private int arrow_Move_Min;
 
+    public AudioSource audio;
+
+    public GameObject keybord;
+    bool issKeybord;
 
     // Start is called before the first frame update
     void Awake()
     {
+        audio = GameObject.FindGameObjectWithTag("Audio_Start").GetComponent<AudioSource>();
         arrow_PosX = chooise_Arrow.anchoredPosition.x;
         arrow_PosY = chooise_Arrow.anchoredPosition.y;
     }
@@ -60,15 +65,30 @@ public class Target_Cont : MonoBehaviour
             switch (arrow_PosY)
             {
                 case -90:
-                    SceneManager.LoadScene("Tutorial_Scene");
+                    StartCoroutine(Start_Co());
                     break;
                 case -220:
-                    
+                    keybord.SetActive(true);
+                    issKeybord = true;
                     break;
                 case -350:
                     Application.Quit();
                     break;
             }
         }
+        if (issKeybord)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.X))
+            {
+                keybord.SetActive(false);
+                issKeybord = false;
+            }
+        }
+    }
+    IEnumerator Start_Co()
+    {
+        audio.Play();
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Tutorial_Scene");
     }
 }

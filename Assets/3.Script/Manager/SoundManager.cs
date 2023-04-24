@@ -39,10 +39,8 @@ public class SoundManager : MonoBehaviour
     public Sound[] sounds_BGM;
     public string[] play_Sound_Name;
     public bool isPlay = false;
-    private void OnEnable()
-    {
+    
 
-    }
     private void Start()
     {
         play_Sound_Name = new string[audio_Source_Effects.Length];

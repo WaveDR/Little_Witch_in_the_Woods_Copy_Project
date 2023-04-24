@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Talk_Manager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Talk_Manager : MonoBehaviour
     public int potion_Num;
     [SerializeField] private Potion[] potion_info;
     [SerializeField] private GameObject[] rand_Quest;
+
+    public Text quset_Text;
 
     private void Awake()
     {
@@ -51,15 +54,19 @@ public class Talk_Manager : MonoBehaviour
         {
             case 0:
                 potion_Num = potion_info[0].mixture_index;
+                quset_Text.text = "현재 목표 : 나쁜 풀 제거 물약";
                 break;
             case 1:
                 potion_Num = potion_info[1].mixture_index;
+                quset_Text.text = "현재 목표 : 치료 사탕";
                 break;
             case 2:
                 potion_Num = potion_info[2].mixture_index;
+                quset_Text.text = "현재 목표 : 저주해제 사탕";
                 break;
             case 3:
                 potion_Num = potion_info[3].mixture_index;
+                quset_Text.text = "현재 목표 : 태양빛 물약";
                 break;
         }
     }

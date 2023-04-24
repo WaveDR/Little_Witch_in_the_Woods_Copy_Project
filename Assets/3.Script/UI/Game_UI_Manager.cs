@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Game_UI_Manager : MonoBehaviour
 {
@@ -125,12 +126,17 @@ public class Game_UI_Manager : MonoBehaviour
     public Smoke_Anim smoke_Anim;
 
     public int source_Index;
-
+    
     public Image npc_Image;
     public Image player_Image;
 
     //==========================================================================================================
 
+    [SerializeField] private GameObject setting_UI;
+    [SerializeField] private GameObject setting_Keybord;
+    [SerializeField] private RectTransform[] HUD_Setting_Pos;
+    [SerializeField] private RectTransform HUD_Setting_Arrow;
+    [SerializeField] private bool isKeybord;
 
     // Start is called before the first frame update
     void Awake()
@@ -138,7 +144,7 @@ public class Game_UI_Manager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -194,6 +200,19 @@ public class Game_UI_Manager : MonoBehaviour
     }
     void Input_UI()
     {
+        if (!player_UI_Book_On && !player_UI_Inventory_On && !player_UI_Quest_On
+        && !player_UI_Pot && !player_UI_Juicer && !player_UI_Loster
+        && !player_UI_Quest && !player_UI_Select_Potion && !player_UI_Throw_Potion
+        && !select_trigger)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                player_UI_Exit = true;
+
+            }
+        }
+
+        //============================================== input start
         if (Input.GetKeyDown(KeyCode.A))
         {
             player_UI_Select_Potion = true;
@@ -282,7 +301,9 @@ public class Game_UI_Manager : MonoBehaviour
         }
      
 
-        if (player_UI_Book_On || player_UI_Quest_On || player_UI_Pot || player_UI_Juicer || player_UI_Loster || select_trigger)
+        if (player_UI_Book_On || player_UI_Quest_On || player_UI_Pot 
+            || player_UI_Juicer || player_UI_Loster || select_trigger
+            || player_UI_Exit)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
@@ -310,6 +331,11 @@ public class Game_UI_Manager : MonoBehaviour
             }
         
         }
+        if(SceneManager.GetActiveScene().name != "Title_Scene")
+        {
+            Setting_Exit();
+
+        }
         Move_Pos_Limit();
         Quest_SetActive();
         Inventory_SetActive();
@@ -319,6 +345,80 @@ public class Game_UI_Manager : MonoBehaviour
         Witch_Loster();
         Select_Subject();
     }
+    private void Setting_Exit()
+    {
+
+        if (player_UI_Exit)
+        {
+            setting_UI.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                setting_UI.SetActive(false);
+                setting_Keybord.SetActive(false);
+                isKeybord = false;
+                player_UI_Exit = false;
+            }
+
+
+            if (UI_Page_Move_Y <= 0)
+            {
+                UI_Page_Move_Y = 0;
+            }
+            if (UI_Page_Move_Y >= 2)
+            {
+                UI_Page_Move_Y = 2;
+            }
+
+            switch (UI_Page_Move_Y)
+            {
+                case 0:
+                    HUD_Setting_Arrow.anchoredPosition = HUD_Setting_Pos[0].anchoredPosition;
+                    break;
+                case 1:
+                    HUD_Setting_Arrow.anchoredPosition = HUD_Setting_Pos[1].anchoredPosition;
+                    break;
+                case 2:
+                    HUD_Setting_Arrow.anchoredPosition = HUD_Setting_Pos[2].anchoredPosition;
+                    break;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                switch (UI_Page_Move_Y)
+                {
+                    case 0:
+                        player_UI_Exit = false;
+                        break;
+                    case 1:
+                        setting_Keybord.SetActive(true);
+                        isKeybord = true;
+                        break;
+                    case 2:
+                        setting_Keybord.SetActive(false);
+                        SceneManager.LoadScene("Title_Scene");
+                        break;
+                }
+            }
+
+            if (isKeybord)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    setting_Keybord.SetActive(false);
+                    isKeybord = false;
+                }
+            }
+        }
+        else
+        {
+            setting_UI.SetActive(false);
+            setting_Keybord.SetActive(false);
+            isKeybord = false;
+            player_UI_Exit = false;
+        }
+    }
+
 
     void Select_Subject()
     {
