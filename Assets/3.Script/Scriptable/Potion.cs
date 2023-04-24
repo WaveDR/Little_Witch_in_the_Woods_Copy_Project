@@ -34,7 +34,7 @@ public class Potion : ScriptableObject
                     break;
 
                 case Potion_Item.potion_Sunlight:
-                    mixture_IDX = 3511000;
+                    mixture_IDX = 3511100;
                     break;
 
                 case Potion_Item.candy_Soft:
@@ -42,7 +42,7 @@ public class Potion : ScriptableObject
                     break;
 
                 case Potion_Item.candy_Healing:
-                    mixture_IDX = 3401100;
+                    mixture_IDX = 3411000;
                     break;
 
                 case Potion_Item.candy_Cough:

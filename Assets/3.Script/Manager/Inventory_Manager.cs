@@ -46,8 +46,8 @@ public class Inventory_Manager : MonoBehaviour
     public bool ui_Select = false;
     public bool ui_Select_Pick_Up = false;
     public int ui_Select_idx = 0;
-    int item_idx = 0;
-    int potion_idx = 0;
+   public  int item_idx = 0;
+    public int potion_idx = 0;
     public int pot_idx = 0;
 
     private Object_Witch Witch_Tool;
@@ -88,6 +88,7 @@ public class Inventory_Manager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(UI_Item_Icon_Prefabs[32].transform.position);
         Inventory_Move_Method();
     }
 
@@ -119,7 +120,7 @@ public class Inventory_Manager : MonoBehaviour
                         {
                             if(inventory_Type_List[inventory_Move_Limit] > 40)
                             {
-                                Debug.Log(inventory_Type_List[inventory_Move_Limit]);
+                                //Debug.Log(inventory_Type_List[inventory_Move_Limit]);
                                 Witch_Tool.pot_ingredient[pot_idx] = inventory_Type_List[inventory_Move_Limit];
                                 inventory_Temp_List.Add(inventory_Type_List[inventory_Move_Limit]);
                                 //아이템 이동 표식
@@ -175,7 +176,7 @@ public class Inventory_Manager : MonoBehaviour
                                         case 3203400:
                                             potion_idx = 33;
                                             break;
-                                        case 3401100:
+                                        case 3411000:
                                             potion_idx = 34;
                                             break;
                                         case 2310100:
@@ -274,88 +275,13 @@ public class Inventory_Manager : MonoBehaviour
             {
                 UI_Position(UI_Item_Icon_Prefabs[inventory_Type_List[inventory_Move_Limit]], UI_Item_Local_Pos);
                 item_Index.RemoveAll(num => num == inventory_Type_List[inventory_Move_Limit]);
-                inventory_Count_List.RemoveAt(inventory_Move_Limit);
+                inventory_Count_List[inventory_Move_Limit] = 0;
                 inventory_Type_List.RemoveAt(inventory_Move_Limit);
 
                 Update_Item_Idx();
+                Inventory_Sort();
 
-                for (int i = 0; i < inventory_Type_List.Count; i++)
-                {
-                    item_idx = inventory_Type_List[i];
 
-                    if (item_idx > 40)
-                    {
-                        switch (item_idx)
-                        {
-                            //=============가공 재료
-                            case 100:
-                                potion_idx = 19;
-                                break;
-                            case 200:
-                                potion_idx = 20;
-                                break;
-                            case 300:
-                                potion_idx = 21;
-                                break;
-                            case 400:
-                                potion_idx = 22;
-                                break;
-                            case 500:
-                                potion_idx = 23;
-                                break;
-                            case 1000:
-                                potion_idx = 24;
-                                break;
-                            case 2000:
-                                potion_idx = 25;
-                                break;
-                            case 3000:
-                                potion_idx = 26;
-                                break;
-                            case 4000:
-                                potion_idx = 27;
-                                break;
-                            case 10000:
-                                potion_idx = 28;
-                                break;
-                            case 20000:
-                                potion_idx = 29;
-                                break;
-                            //============포션
-                            case 2401100:
-                                potion_idx = 30;
-                                break;
-                            case 3330200:
-                                potion_idx = 31;
-                                break;
-                            case 1322300:
-                                potion_idx = 32;
-                                break;
-                            case 3203400:
-                                potion_idx = 33;
-                                break;
-                            case 3401100:
-                                potion_idx = 34;
-                                break;
-                            case 2310100:
-                                potion_idx = 35;
-                                break;
-                            case 3511000:
-                                potion_idx = 36;
-                                break;
-                            case 2424500:
-                                potion_idx = 37;
-                                break;
-                        }
-
-                        UI_Position(UI_Item_Icon_Prefabs[potion_idx], UI_Item_Icon_Pos[i]);
-                    }
-                    else if (item_idx < 40)
-                    {
-
-                        UI_Position(UI_Item_Icon_Prefabs[item_idx], UI_Item_Icon_Pos[i]);
-                    }
-                }
                 PickUp_Item.SetActive(false);
                 ui_Select_Pick_Up = false;
             }
@@ -372,6 +298,88 @@ public class Inventory_Manager : MonoBehaviour
 
         //아이템 들기 시 플레이어 HUD
         PickUp_Item.transform.position = Camera.main.WorldToScreenPoint(PickUp_Pos.transform.position);
+    }
+
+    public void Inventory_Sort()
+    {
+        for (int i = 0; i < inventory_Type_List.Count; i++)
+        {
+            item_idx = inventory_Type_List[i];
+
+            if (item_idx > 40)
+            {
+                switch (item_idx)
+                {
+                    //=============가공 재료
+                    case 100:
+                        potion_idx = 19;
+                        break;
+                    case 200:
+                        potion_idx = 20;
+                        break;
+                    case 300:
+                        potion_idx = 21;
+                        break;
+                    case 400:
+                        potion_idx = 22;
+                        break;
+                    case 500:
+                        potion_idx = 23;
+                        break;
+                    case 1000:
+                        potion_idx = 24;
+                        break;
+                    case 2000:
+                        potion_idx = 25;
+                        break;
+                    case 3000:
+                        potion_idx = 26;
+                        break;
+                    case 4000:
+                        potion_idx = 27;
+                        break;
+                    case 10000:
+                        potion_idx = 28;
+                        break;
+                    case 20000:
+                        potion_idx = 29;
+                        break;
+                    //============포션
+
+                    case 2401100:
+                        potion_idx = 30;
+                        break;
+                    case 3330200:
+                        potion_idx = 31;
+                        break;
+                    case 3511100:
+                        potion_idx = 32;
+                        break;
+                    case 1322300:
+                        potion_idx = 33;
+                        break;
+                    case 3411000:
+                        potion_idx = 34;
+                        break;
+                    case 3203400:
+                        potion_idx = 35;
+                        break;
+                    case 2310100:
+                        potion_idx = 36;
+                        break;
+                    case 2424500:
+                        potion_idx = 37;
+                        break;
+                }
+                UI_Position(UI_Item_Icon_Prefabs[potion_idx], UI_Item_Icon_Pos[i]);
+                UI_Item_Icon_Text[potion_idx].text = $"{inventory_Count_List[i]}";
+            }
+            else if (item_idx < 40)
+            {
+                UI_Position(UI_Item_Icon_Prefabs[item_idx], UI_Item_Icon_Pos[i]);
+                UI_Item_Icon_Text[item_idx].text = $"{inventory_Count_List[i]}";
+            }
+        }
     }
     public void Update_Item_Idx()
     {
@@ -439,19 +447,19 @@ public class Inventory_Manager : MonoBehaviour
                         case 3330200:
                             potion_idx = 31;
                             break;
-                        case 1322300:
+                        case 3511100:
                             potion_idx = 32;
                             break;
-                        case 3203400:
+                        case 1322300:
                             potion_idx = 33;
                             break;
-                        case 3401100:
+                        case 3411000:
                             potion_idx = 34;
                             break;
-                        case 2310100:
+                        case 3203400:
                             potion_idx = 35;
                             break;
-                        case 3511000:
+                        case 2310100:
                             potion_idx = 36;
                             break;
                         case 2424500:
@@ -459,6 +467,8 @@ public class Inventory_Manager : MonoBehaviour
                             break;
                     }
                     UI_Position(UI_Item_Icon_Prefabs[potion_idx], UI_Item_Icon_Pos[i]);
+
+  
                     UI_Item_Icon_Text[potion_idx].text = $"{inventory_Count_List[i]}";
                 }
                 else if (item_idx < 40)
@@ -530,19 +540,19 @@ public class Inventory_Manager : MonoBehaviour
                     case 3330200:
                         potion_idx = 31;
                         break;
-                    case 1322300:
+                    case 3511100:
                         potion_idx = 32;
                         break;
-                    case 3203400:
+                    case 1322300:
                         potion_idx = 33;
                         break;
-                    case 3401100:
+                    case 3411000:
                         potion_idx = 34;
                         break;
-                    case 2310100:
+                    case 3203400:
                         potion_idx = 35;
                         break;
-                    case 3511000:
+                    case 2310100:
                         potion_idx = 36;
                         break;
                     case 2424500:

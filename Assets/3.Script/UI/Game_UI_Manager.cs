@@ -147,8 +147,14 @@ public class Game_UI_Manager : MonoBehaviour
 
         TryGetComponent(out anim);
 
+        HUD_Book.SetActive(true);
+        HUD_Inventory.SetActive(true);
+        HUD_Press.SetActive(true);
         HUD_Witch_Juicer.SetActive(true);
+        HUD_Witch_Loster.SetActive(true);
         HUD_Witch_Pot.SetActive(true);
+        talk_File.SetActive(true);
+        quest_File.SetActive(true);
 
         witch_Juicer = GameObject.FindGameObjectWithTag("Witch_Obj_Juicer").GetComponent<Object_Witch>();
         witch_Pot = GameObject.FindGameObjectWithTag("Witch_Obj_Pot").GetComponent<Object_Witch>();
@@ -174,7 +180,10 @@ public class Game_UI_Manager : MonoBehaviour
         HUD_Press.SetActive(false);
         HUD_Witch_Juicer.SetActive(false);
         HUD_Witch_Pot.SetActive(false);
+        HUD_Witch_Loster.SetActive(false);
         talk_File.SetActive(false);
+        quest_File.SetActive(false);
+
     }
     // Update is called once per frame
     void Update()
@@ -349,6 +358,7 @@ public class Game_UI_Manager : MonoBehaviour
         string talkData =  Talk_Manager.Instance.GetTalk(id,Talk_Manager.Instance.next_Count);
 
         talk_Text.text = "무슨 일로 왔니?";
+        npc_Image.sprite = Talk_Manager.Instance.pot_Array[0];
         if (talkData == null)
         {
             if(id == 2)
@@ -609,6 +619,7 @@ public class Game_UI_Manager : MonoBehaviour
             for (int i = 0; i < HUD_Witch_Pot_Rotate.Length; i++)
             {
                 HUD_Witch_Pot_Rotate[i].SetActive(true);
+
                 if (i != player_UI_Potion_Change)
                 {
                     HUD_Witch_Pot_Rotate[i].SetActive(false);
@@ -618,7 +629,12 @@ public class Game_UI_Manager : MonoBehaviour
             int potion_Index = witch_Pot.potion_Num;
             Debug.Log(potion_Index);
             Player_Press_Make(1, ref potion_Index);
-        } 
+        }
+        else
+        {
+            HUD_Witch_Pot.SetActive(false);
+            Inventory_Manager.Instance.pot_idx = 0;
+        }
     }
     public void Witch_Juicer()
     {
@@ -823,29 +839,27 @@ public class Game_UI_Manager : MonoBehaviour
                 }
                 else if (player_UI_Quest)
                 {
-                    //교환하는거 만들기
-                    //1. 해당하는 아이템 삭제
-                    //2. 플레이어에게 코인 30개 주기
-                    //3. 누르는 타임 0으로 설정
-                    //단, talk 매니저에서 있는 요소들을 적극적으로 사용하여 구현하기
-
-                    // Inventory_Manager.Instance.inventory_Count_List.RemoveAt(source);
-                    Inventory_Manager.Instance.inventory_Type_List.RemoveAt(source);
-                    SoundManager.Instance.Play_Sound_Effect("Witch_Quest_Complete");
-
-                    
-                    Inventory_Manager.Instance.inventory_Count_List[source_Index] = 0;
-                    Inventory_Manager.Instance.Update_Item_Idx();
-                    Inventory_Manager.Instance.Update_Text();
-
                     time = 0;
                     player_Coin += 30;
+                    SoundManager.Instance.Play_Sound_Effect("Witch_Quest_Complete");
+
+                    Inventory_Manager.Instance.UI_Position(Inventory_Manager.Instance.UI_Item_Icon_Prefabs[Inventory_Manager.Instance.inventory_Type_List[source]], Inventory_Manager.Instance.UI_Item_Local_Pos);
+
+                    Inventory_Manager.Instance.item_Index.RemoveAll
+                        (num => num == Inventory_Manager.Instance.inventory_Type_List[source]);
+
+                    Inventory_Manager.Instance.inventory_Count_List[count] = 0;
+                    Inventory_Manager.Instance.inventory_Type_List.RemoveAt(source);
+
+                    Inventory_Manager.Instance.Update_Item_Idx();
+                    Inventory_Manager.Instance.Inventory_Sort();
 
 
+
+                    Talk_Manager.Instance.Trade_Potion();
                     talk_File.SetActive(false);
                     player_UI_Quest = false;
                     select_trigger = false;
-                    Talk_Manager.Instance.Trade_Potion();
                     return;
                 }
             }
@@ -865,7 +879,7 @@ public class Game_UI_Manager : MonoBehaviour
 
             if (player_UI_Quest)
             {
-                HUD_Loster_Press_Bar.fillAmount = time / 3;
+                HUD_Quest_Press_Bar.fillAmount = time / 3;
             }
         }
         else if (count < 2)

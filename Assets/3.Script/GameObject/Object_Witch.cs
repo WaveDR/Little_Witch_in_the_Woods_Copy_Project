@@ -117,7 +117,7 @@ public class Object_Witch: MonoBehaviour
        // }
         for (int i = 0; i < pot_ingredient.Length; i++)
         {
-            Debug.Log(ingredient[i]);
+           // Debug.Log(ingredient[i]);
             if (i > 2) break;
 
             pot_ingredient[i] = ingredient[i];
@@ -149,14 +149,14 @@ public class Object_Witch: MonoBehaviour
              potion_Make_Sucess = true;
              break;
          //기침 사탕
-         case 3401100:
+         case 3411000:
              potion_Make_Sucess = true;
              break;
          //치료사탕
          case 2310100:
              potion_Make_Sucess = true;
              break;
-         case 3511000:
+         case 3511100:
              potion_Make_Sucess = true;
              break;
          //태양빛 물약
@@ -253,7 +253,7 @@ public class Object_Witch: MonoBehaviour
                 case 2310100:
                     potion_idx = 35;
                     break;
-                case 3511000:
+                case 3511100:
                     potion_idx = 36;
                     break;
                 case 2424500:
@@ -347,6 +347,27 @@ public class Object_Witch: MonoBehaviour
                 default: return;
             }
         }
+        if (Game_UI_Manager.Instance.player_UI_Quest)
+        {
+            switch (source)
+            {
+                case 2401100:
+                    Result_Trade_Methord(source, ref count, 0);
+                    break;
+                case 3411000:
+                    Result_Trade_Methord(source, ref count, 1);
+                    break;
+                case 2310100:
+                    Result_Trade_Methord(source, ref count, 2);
+                    break;
+                case 3511100:
+                    Result_Trade_Methord(source, ref count, 3);
+                    break;
+                default: return;
+            }
+
+
+        }
     }
     void Result_Trade_Methord(int source, ref int count, int i)
     {
@@ -355,7 +376,7 @@ public class Object_Witch: MonoBehaviour
         while (a <= 1)
         {
             k = Inventory_Manager.Instance.item_Index.FindIndex(num => num == source);
-            Debug.Log($"1개 이상 남아있을때 : {k}");
+          
             Inventory_Manager.Instance.item_Index.RemoveAt(k);
             a++;
         }
@@ -367,7 +388,7 @@ public class Object_Witch: MonoBehaviour
         if (count <= 0)
         {
             //Inventory_Manager.Instance.item_Index.Add(ingredient_Idx[i].mixture_index);
-            Debug.Log($"1개 이상 남아있지 않을 때 : {source}");
+  
             count++;
 
             Inventory_Manager.Instance.UI_Position(Inventory_Manager.Instance.UI_Item_Icon_Prefabs

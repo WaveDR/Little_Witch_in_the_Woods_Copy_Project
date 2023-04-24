@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1731567601
-  m_SortingLayer: 6
+  m_SortingLayerID: 1027881629
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -7867831082583159, guid: cf037ea896d8fb44fb5955dd0657d451, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -126,11 +126,14 @@ MonoBehaviour:
   anim: {fileID: 4794659554208278221}
   player: {fileID: 0}
   sprite: {fileID: 0}
+  Move_Point: {x: 0, y: 0}
   isCollect: 0
   isLookAt: 0
   isMove: 0
   isPlayer_Lookat: 0
   isHunt: 0
+  spawn_Sound: 
+  collect_Sound: 
 --- !u!58 &4794659554208278217
 CircleCollider2D:
   m_ObjectHideFlags: 0

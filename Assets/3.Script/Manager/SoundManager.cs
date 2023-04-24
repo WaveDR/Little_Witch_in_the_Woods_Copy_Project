@@ -66,10 +66,10 @@ public class SoundManager : MonoBehaviour
                         return;
                     }
                 }
-                Debug.Log("모든 가용 AudttioSource가 사용 중입니다.");
+                //Debug.Log("모든 가용 AudttioSource가 사용 중입니다.");
                 return;
             }
-            Debug.Log(_Name + "사운드가 SoundManager에 등록되지 않았습니다");
+            //Debug.Log(_Name + "사운드가 SoundManager에 등록되지 않았습니다");
         }
 
     }
@@ -93,10 +93,10 @@ public class SoundManager : MonoBehaviour
                         return;
                     }
                 }
-                Debug.Log("모든 가용 AudttioSource가 사용 중입니다.");
+              //  Debug.Log("모든 가용 AudttioSource가 사용 중입니다.");
                 return;
             }
-            Debug.Log(_Name + "사운드가 SoundManager에 등록되지 않았습니다");
+           // Debug.Log(_Name + "사운드가 SoundManager에 등록되지 않았습니다");
         }
     }
     public void Stop_All_Sound_Effect()
@@ -119,6 +119,6 @@ public class SoundManager : MonoBehaviour
                 return;
             }
         }
-        Debug.Log("재생 중인" + _Name + "사운드가 없습니다.");
+       // Debug.Log("재생 중인" + _Name + "사운드가 없습니다.");
     }
 }
