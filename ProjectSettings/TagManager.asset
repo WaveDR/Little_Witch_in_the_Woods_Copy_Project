@@ -27,6 +27,7 @@ TagManager:
   - Under_Ground
   - UI_Quest
   - Audio_Start
+  - Anim_Start
   layers:
   - Default
   - TransparentFX

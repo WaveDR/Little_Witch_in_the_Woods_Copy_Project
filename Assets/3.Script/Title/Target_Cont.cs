@@ -19,13 +19,14 @@ public class Target_Cont : MonoBehaviour
 
     public GameObject keybord;
     bool issKeybord;
-
+    Animator anim;
     // Start is called before the first frame update
     void Awake()
     {
         audio = GameObject.FindGameObjectWithTag("Audio_Start").GetComponent<AudioSource>();
         arrow_PosX = chooise_Arrow.anchoredPosition.x;
         arrow_PosY = chooise_Arrow.anchoredPosition.y;
+        anim = GameObject.FindGameObjectWithTag("Anim_Start").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -88,7 +89,9 @@ public class Target_Cont : MonoBehaviour
     IEnumerator Start_Co()
     {
         audio.Play();
-        yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("Tutorial_Scene");
+        yield return new WaitForSeconds(1.2f);
+        anim.SetTrigger("Start_Anim");
+        yield return new WaitForSeconds(0.8f);
+        Loading_Manager.LoadScene("Tutorial_Scene");
     }
 }

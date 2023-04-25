@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1079305253
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -1247013461
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 987338084745410948, guid: 9a84593a39a9a7440a8c272ca6f1abdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -117,10 +117,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  player: {fileID: 0}
   enemy_Prefab: {fileID: 6978014714071058499, guid: dfd1dc6c0fa0b7e4a8b12f43f20935c5, type: 3}
   poolPos: {x: -50, y: -50}
   charge_Button_Count: 0
   spawnEnemy_Count: 1
+  isSpawn: 0
   failling: 0
   circle: {fileID: 0}
   box: {fileID: 6308849532954969019}
